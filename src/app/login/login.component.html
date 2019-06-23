@@ -1,0 +1,68 @@
+<div class="login">
+
+  <section class="container d-block">
+
+    <form class="form-signin " [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="row justify-content-center align-self-center">
+        <div class="col text-center logoForm">
+          <img class="img-fluid" src="../../assets/images/logo/jul-logowhite.png" alt="">
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center">
+
+        <div class="card col-xs-12 col-md-6 col-lg-4">
+
+          <div class="card-body">
+            <div class="col-12 pl-0 pr-0" *ngIf="protocoled_login_active">
+              <div class="form-group">
+                <label>{{ 'login.label.protocoled' | translate }}</label>
+                <app-checkbox formControlName="protocoled"> {{ 'login.label.check.protocoled' | translate }} </app-checkbox>
+              </div>
+            </div>
+
+            <div class="col-12 pl-0 pr-0" *ngIf="loginForm.value?.protocoled == false">
+              <div class="form-group">
+                <label for="inputEmail">{{ 'login.label.username' | translate }}</label>
+                <input [attr.disabled]="haveEntities ? '' : null" id="inputEmail" formControlName="username" class="form-control" placeholder="{{ 'login.placeholder.username' | translate }}"
+                 type="email" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">{{ 'login.message.mandatory.username' | translate }}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 pl-0 pr-0" *ngIf="loginForm.value?.protocoled == false">
+              <div class="form-group">
+                <label for="inputPassword">{{ 'login.label.password' | translate }}</label>
+                <input [attr.disabled]="haveEntities ? '' : null" id="inputPassword" formControlName="password" class="form-control" placeholder="{{ 'login.placeholder.password' | translate }}"
+                 type="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">{{ 'login.message.mandatory.password' | translate }}</div>
+                </div>
+                <div class="mt-2">
+                  <a [routerLink]="['/login/recover-password']" href="#">{{ 'login.link.recover.password' | translate }}</a>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12 text-center pl-0 pr-0">
+              <button class="btn btn-md col-6 login-button" type="submit">{{ 'login.button.login' | translate }}</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="d-flex justify-content-center mt-4" *ngIf="visible">
+      <div class="col-12 text-center">
+        <button class="btn btn-md col-6 registry-button" type="submit" [routerLink]="['/','terms']">{{ 'login.button.regitry' | translate }}</button>
+      </div>
+    </div>
+
+  </section>
+
+</div>
