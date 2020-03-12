@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+// Functions
+// @import "../node_modules/bootstrap/scss/functions";
 
+//Fonts
+
+// Site + Bootstrap Variable and Mixins
+// @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
@@ -7,18 +13,66 @@
 @import "./assets/scss/bootstrap-imports";
 @import "./assets/scss/variables";
 @import "./assets/scss/text";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import "./assets/scss/pace.scss";
+// @import "./assets/scss/bootstrap.scss";
+// @import "./assets/scss/mixins";
+// @import "./assets/scss/bootstrap-overrides/mixins";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 // // Site Styles
+// @import "./assets/scss/fonts";
+// @import "./assets/scss/generics";
+// @import "./assets/scss/base";
 @import "./assets/scss/layout";
+// @import "./assets/scss/charts";
+// @import "./assets/scss/toggle-switch";
+// @import "./assets/scss/listview";
+// @import "./assets/scss/page-loader";
+// @import "./assets/scss/select";
+// @import "./assets/scss/text";
+// @import "./assets/scss/sidebar";
+// @import "./assets/scss/error";
+// @import "./assets/scss/loadings";
+// @import "./assets/scss/typeahead";
+// @import "./assets/scss/timeline";
+// @import "./assets/scss/theme";
 
+// Bootstrap Overrides
+// @import "./assets/scss/bootstrap-overrides/dropdown";
+// @import "./assets/scss/bootstrap-overrides/media";
+// @import "./assets/scss/bootstrap-overrides/progress";
+// @import "./assets/scss/bootstrap-overrides/card";
+// @import "./assets/scss/bootstrap-overrides/buttons";
+// @import "./assets/scss/bootstrap-overrides/tables";
+// @import "./assets/scss/bootstrap-overrides/forms";
+// @import "./assets/scss/bootstrap-overrides/input-groups";
+// @import "./assets/scss/bootstrap-overrides/custom-forms";
+// @import "./assets/scss/bootstrap-overrides/pagination";
+// @import "./assets/scss/bootstrap-overrides/datepicker";
+// @import "./assets/scss/bootstrap-overrides/timepicker";
+// @import "./assets/scss/bootstrap-overrides/alerts";
+// @import "./assets/scss/bootstrap-overrides/close";
+// @import "./assets/scss/bootstrap-overrides/breadcrumbs";
+// @import "./assets/scss/bootstrap-overrides/accordion";
+// @import "./assets/scss/bootstrap-overrides/carousel";
+// @import "./assets/scss/bootstrap-overrides/modal";
+// @import "./assets/scss/bootstrap-overrides/popovers";
+// @import "./assets/scss/bootstrap-overrides/ratings";
+// @import "./assets/scss/bootstrap-overrides/sortable";
 @import "./assets/scss/bootstrap-overrides/tabs";
+// @import "./assets/scss/bootstrap-overrides/tooltip";
+// @import "./assets/scss/bootstrap-overrides/text";
+// @import "./assets/scss/bootstrap-overrides/badge";
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-}
+// Vendor Overrides
+// @import "./assets/scss/vendor-overrides/select2";
+// @import "./assets/scss/vendor-overrides/alertify";
+// @import "./assets/scss/vendor-overrides/perfect-scrollbar";
+// @import "./assets/scss/vendor-overrides/block-ui";
+
+// App Global Styles
+// @import "./assets/scss/misc";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; }

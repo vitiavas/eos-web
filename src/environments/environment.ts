@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   blockchain: 'eos',
-  nodeos_chainId: 'CHAIN_ID',
+  nodeos_chainId: 'bf283e69af4b365f7a9b39e16ced264cf747d65273b68584060fc3c4ead105ed',
   nodeos_name: 'Local',
   nodeos_protocol: 'http',
   nodeos_port: 8888,

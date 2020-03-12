@@ -15,9 +15,9 @@ const environment = {
     nodeos_url: "http://127.0.0.1:8888",
     ros_url: "http://",
     dbName: "test",
-    gaspar_private_key: 'ROBOT_PRIVATE_KEY',
-};
+    gaspar_private_key: '5JUgfXi4jSgah22vsvNLTqiKSuvysh1ZdWQT3BzxS9vB2xUhoRg',
 
+};
 module.exports = environment
 /*
  * In development mode, to ignore zone related error stack frames such as
