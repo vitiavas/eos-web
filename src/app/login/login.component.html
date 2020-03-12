@@ -1,0 +1,102 @@
+<div class="background"></div>
+
+<app-alert [id]="alertId" [isLoginPage]="true" [klass]="['position-fixed']"></app-alert>
+<section class="container d-flex flex-center col-12" style="height: 100vh">
+  <div class="col-8 mb-5">
+    <div class="login-logo mb-5">
+      <h1 class="unicorn-header unicorn-title app-name">{{ 'generic.title.app-name' | translate }} </h1>
+    </div>
+    <ng-container *ngIf="loginSelected">
+
+      <div class="simple-card-div">
+
+        <div class="card card-style col-xs-12 col-md-6 col-lg-5" style="border-radius: 5px">
+          <div class="row title-card-background">
+            <div class="col-md-12 flex-center" style="text-align: center; padding: 0;">
+              <label class="title-card">{{ 'login.title.login' | translate }}</label>
+            </div>
+          </div>
+          <div class="card-body">
+
+            <div class="col-12 pl-0 pr-0">
+              <form [formGroup]="loginForm">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>{{ 'login.label.username' | translate }}</label>
+                    <app-input class="form-control" placeholder="{{ 'login.placeholder.username' | translate }}"
+                      [validations]="validations.username"
+                      formControlName="username"></app-input>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-12">
+              <div class="d-flex justify-content-center mt-4">
+                <div class="col-12 text-center">
+                  <button class="btn btn-md col-6 btn-primary registry-button" (click)="loginWithScatter()">{{
+                              'login.button.sign-in' | translate }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12" style="text-align: center;">
+          <label (click)="loginSelected = false; registerSelected = true; updateValidators()" class="grey-text">
+            {{ 'login.label.not-registered' | translate }}<span
+              class="link-btn ml-2">{{ 'login.label.register' | translate }}</span></label>
+        </div>
+      </div>
+    </ng-container>
+
+
+    <ng-container *ngIf="registerSelected">
+      <div class="simple-card-div">
+
+        <div class="card card-style col-xs-12 col-md-6 col-lg-5" style="border-radius: 5px">
+          <div class="row title-card-background">
+            <div class="col-md-12 flex-center" style="text-align: center; padding: 0;">
+              <label class="title-card">{{ 'login.title.register' | translate }}</label>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="col-12 pl-0 pr-0">
+              <form [formGroup]="loginForm">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>{{ 'login.label.username' | translate }}</label>
+                    <app-input class="form-control" [validations]="validations.username"
+                      placeholder="{{ 'login.placeholder.username' | translate }}" formControlName="username">
+                    </app-input>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>{{ 'login.label.uid' | translate }}</label>
+                    <app-input class="form-control" [validations]="validations.uid"
+                      placeholder="{{ 'login.placeholder.uid' | translate }}" formControlName="uid">
+                    </app-input>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-12 btn-div">
+              <button class="btn btn-md col-6 btn-primary registry-button" (click)="registerWithScatter()"
+                type="submit">
+                {{ 'login.button.regitry' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12" style="text-align: center;">
+          <label (click)="registerSelected = false; loginSelected = true; updateValidators()"
+            class="link-btn">{{ 'login.label.back-to-login' | translate }}</label>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</section>

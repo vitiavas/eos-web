@@ -1,0 +1,4 @@
+
+<ng-container *ngFor="let validation of validations;">
+    <span class="help-block text-danger" *ngIf="ngControl?.hasError(validation.type) && ngControl?.touched">{{validation.message | translate}}</span>
+</ng-container>

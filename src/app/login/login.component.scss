@@ -1,0 +1,155 @@
+@import "~@angular/material/theming";
+
+.app-name {
+  color: #e0e0e0;
+  font-style: italic;
+  font-size: 50px;
+  font-family: cursive;
+}
+.simple-card-div {
+  justify-content: center;
+  position: relative;
+  border-radius: 5px;
+  display: flex !important;
+}
+.link-btn {
+  font-family: OpenSans;
+  color: #aebbbf;
+  color: white !important;
+  cursor: pointer;
+  font-size: 18px;
+}
+.grey-text {
+  color: #d4d4d4 !important;
+}
+.title-card-background {
+  background: #212529;
+}
+.title-card {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4462ba;
+  opacity: 0.8;
+  font-size: 20px;
+  margin-top: 0px;
+  padding: 0;
+  margin-bottom: 0px;
+  height: 35px;
+}
+.card-style {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #3f51b5c7;
+  background-clip: border-box;
+  /* border: 1px solid rgba(0, 0, 0, 0.125); */
+  border-radius: 0.45rem;
+  opacity: 0.8;
+  border: none !important;
+}
+.login-logo {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+.padding {
+  padding: 20px;
+}
+
+.registry-button:disabled {
+  cursor: no-drop !important;
+  opacity: 0.4 !important;
+}
+
+.registry-button {
+  opacity: 0.8;
+  border-radius: 3px;
+  font-size: 14px;
+  height: 40px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: white !important;
+  font-weight: 600;
+  border-color: #3c8dbc;
+  cursor: pointer;
+}
+.btn-div {
+  text-align: center;
+  margin-top: 25px;
+}
+.selected {
+  background-color: #3c8dbc !important;
+  color: white !important;
+}
+.block {
+  display: block;
+}
+.tab-label {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  color: #aebbbf;
+}
+.tab {
+  background-color: #465259;
+  display: inline-block;
+  padding: 5px 40px 5px 40px;
+  font-size: 14px;
+  font-family: OpenSans;
+}
+
+.background {
+  position: fixed;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-image: linear-gradient(to bottom, #3b51bb, #1189bd 48%, #3b51bb);
+  opacity: 0.7;
+}
+
+h3 {
+  font-family: OpenSans;
+  color: white;
+  text-align: center;
+  font-weight: 300;
+  font-size: 23px;
+}
+.login {
+  padding: 5px 60px 5px 60px !important;
+}
+
+label {
+  font-family: OpenSans;
+  color: #aebbbf;
+}
+.link-btn {
+  font-family: OpenSans;
+  color: #aebbbf;
+  color: white !important;
+  cursor: pointer;
+  font-size: 18px;
+}
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}

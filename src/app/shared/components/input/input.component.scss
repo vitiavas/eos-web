@@ -1,0 +1,33 @@
+
+
+
+.is-invalid {
+    border-color: #ffffff;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #aebbbf;
+    opacity: 1; /* Firefox */
+}
+
+input {
+    display: block;
+    width: 100%;
+    height: calc(-0.846em);
+    padding: 0.85rem 0rem;
+    background-color: transparent;
+    border: 2px solid #7c868e;
+    border-radius: 2px;
+    font-family: OpenSans;
+    color: white;
+    font-size: 14px;
+    padding-left: 5px;
+    margin-bottom: 15px;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #ffffff !important;
+}
+.form-control.is-invalid:focus, .was-validated .form-control:invalid:focus {
+    border-color: #ffffff !important;
+}

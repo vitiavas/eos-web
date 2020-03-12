@@ -1,0 +1,73 @@
+<!-- <app-alert></app-alert> -->
+<app-alert [id]="alertId" [klass]="['position-fixed']"></app-alert>
+
+<section class="content--full">
+  <div class="row" style="justify-content: center;height: calc(100vh - 50px); top: 5vh; position: relative;">
+    <div class="col-md-8 vertical-separator">
+      <div class="row mb-4">
+        <div class="col-12" style="text-align: center;">
+          <label class="welcome-text">{{ 'home.label.welcome' | translate }}</label>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-12" style="text-align: center;">
+          <label class="text-style" style="font-size: 20px;">{{ 'home.label.select-data' | translate }}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+          <div class="box">
+            <div class="box-header" style="text-align: center">
+              <label class="box-title" style="color: black; font-size: 20px;"> {{ 'home.title.personal-data' | translate }} </label>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table *ngIf="!tableIsEmpty" style="border: none !important" class="table table-hover dataTable font-size">
+                    <thead>
+                      <tr role="row">
+                        <th style="border: none !important" class="font-size">{{ 'home.title.date' | translate }}</th>
+                      </tr> 
+                      <tr>
+                        <hr class="horizontal-line">
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let record of records; let i = index" >
+                        <tr style="cursor: pointer">
+                          <td style="border: none !important" (click)="loadRecord(record)"> {{ record?.time }} </td>
+                        </tr>
+                        <tr *ngIf="i != records?.length - 1">
+                          <hr class="row-line">
+                        </tr>
+                      </ng-container>
+
+                    </tbody>
+                  </table>
+                  <div *ngIf="tableIsEmpty" class="row" style="height: 15vh">
+                    <div class="col-md-12 flex-center">
+                      <label style="font-size: 20px; font-style: italic;">{{ 'home.labe.table-is-empty' | translate }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <button (click)="eraseAllDataFromStorage()">
+                    Erase All Data
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-2">
+
+    </div> -->
+  </div>
+</section>
+
+<router-outlet name="sidebar"></router-outlet>

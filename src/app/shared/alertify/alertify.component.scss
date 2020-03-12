@@ -1,0 +1,54 @@
+@import '../../../assets/scss/_variables';
+
+:host {
+    width: 100% !important;
+  }
+  
+  .alerts-container {
+    left: 0;
+    width: 100%;
+    padding: 6px 0;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    width: 100%;
+    opacity: 0.9;
+    padding: 0;
+    top: $header-height;
+    & ::ng-deep {
+      & alert {
+        width: 100%;
+  
+        & .alert {
+          text-align: center !important;
+          padding: 5px 1.5rem !important;
+          margin-bottom: 0 !important;
+          z-index: 10;
+          width: 100%;
+          &.alert-dismissible .close {
+            padding: 5px 1.5rem !important;
+          }
+        }
+      }
+    }
+  }
+  
+  .alert-full-page-adjustment {
+    z-index: 9;
+    width: 102%;
+    top: -30px;
+    left: -20px;
+    position: relative;
+  }
+  
+  .top-0 {
+    top: 0px !important;
+  }
+
+  @media screen and (max-width: 1780px) {
+    .alert-full-page-adjustment {
+      width: 103% !important
+    }
+  }
+  
+  

@@ -1,0 +1,97 @@
+<div [class.form-group] = "label">
+  <ng-content select="app-input-prefix"></ng-content>
+  
+  <label *ngIf="label" [attr.for]="id">{{ label }} <span [innerHTML]="requiredIndicatorView"></span></label>
+  <textarea
+    *ngIf="type === 'textarea'"
+    class="form-control"
+    [class.is-invalid]="!fieldValidation.isValid()"
+    [class.is-required]="fieldValidation.isRequired()"
+    [rows]=rows
+    [(ngModel)]="value"
+    [id]="id"
+    [name]="name"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [attr.tabindex]="tabindex"
+    [attr.autocomplete]="autocomplete"
+    [attr.autocorrect]="autocorrect"
+    [attr.spellcheck]="spellcheck"
+    [minlength]="minlength"
+    [maxlength]="maxlength"
+    [required]="required"
+    (change)="onChange($event)"
+    (keyup)="onKeyUp($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    (click)="click.emit($event)"
+    #textareaControl>
+  </textarea>
+  <input
+    *ngIf="type !== 'textarea'"
+    class="form-control"
+    [class.is-invalid]="!fieldValidation.isValid()"
+    [ngModel]="value"
+    (ngModelChange)= "value = $event"
+    [hidden]="passwordTextVisible"
+    [id]="id"
+    [name]="name"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [type]="type"
+    [min]="'' + min"
+    [max]="'' + max"
+    [minlength]="minlength"
+    [maxlength]="maxlength"
+    [attr.tabindex]="tabindex"
+    [attr.autocomplete]="autocomplete"
+    [attr.autocorrect]="autocorrect"
+    [attr.spellcheck]="spellcheck"
+    (change)="onChange($event)"
+    (keypress)="onkeypress($event)"
+    (keyup)="onKeyUp($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    (click)="click.emit($event)"
+    [required]="required"
+    [pattern]="patterns"
+    #inputControl
+  />
+
+  
+  <input
+    *ngIf="passwordToggleEnabled"
+    [hidden]="!passwordTextVisible"
+    type="text"
+    class="form-control"
+    [class.is-invalid]="!fieldValidation.isValid()"
+    [class.is-required]="fieldValidation.isRequired()"
+    type="text"
+    [id]="id + '-password'"
+    [placeholder]="placeholder"
+    [name]="name"
+    [disabled]="disabled"
+    [minlength]="minlength"
+    [maxlength]="maxlength"
+    [attr.autocomplete]="autocomplete"
+    [attr.autocorrect]="autocorrect"
+    [attr.spellcheck]="spellcheck"
+    [attr.tabindex]="tabindex"
+    [(ngModel)]="value"
+    (change)="onChange($event)"
+    (keyup)="onKeyUp($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    (click)="click.emit($event)"
+    [required]="required"
+    #passwordControl
+  />
+  
+  <ng-content select="app-input-suffix"></ng-content>
+  
+  <!-- <i
+  *ngIf="type === 'password' && passwordToggleEnabled" class="zmdi zmdi-eye" (click)="togglePassword()">
+  </i> -->
+  <app-field-validation #fieldValidation  [validations]="validations"></app-field-validation>
+  </div>
+  

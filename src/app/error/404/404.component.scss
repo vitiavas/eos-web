@@ -1,0 +1,35 @@
+.not-found {
+    font-size: 100px;
+    text-align: center;
+    margin-top: 155px;
+    font-weight: 300;
+}
+
+.text-yellow {
+    color: #f39c12 !important;
+}
+
+.content {
+    min-height: 250px;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.fa-warning:before, .fa-exclamation-triangle:before {
+    content: "\f071";
+}
+a {
+    color: #3c8dbc !important;
+    cursor: pointer !important;
+}
+
+.error-content {
+    // margin-left: 190px;
+    display: block;
+}
+.error-page {
+    width: 600px;
+    margin: 20px auto 0 auto;
+}

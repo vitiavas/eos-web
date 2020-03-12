@@ -1,0 +1,17 @@
+<app-alert [id]="alertId" [klass]="['position-fixed']"></app-alert>
+
+<div class="container flex-center" style="height: 100vh;">
+  <div>
+    <div class="row">
+      <div class="col-md-12 video-container">
+        <img src="{{img}}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 flex-center">
+        <button class="btn btn-danger" (click)="removeFrames()">{{ 'generic.button.delete' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
