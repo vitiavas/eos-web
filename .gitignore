@@ -48,4 +48,4 @@ Thumbs.db
 
 # Blockchain
 
-/src/blockchain/*
+/src/blockchain/biosboot/genesis/blockchain/data/*
