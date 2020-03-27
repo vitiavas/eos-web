@@ -47,12 +47,23 @@ export class MainPageComponent implements OnInit {
     this.alertify.clear();
     const delay = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
     this.activatedRoute.paramMap.subscribe(params => {
-      this.id = params.get("id");
+      this.minTime = params.get("minTime");
+      this.maxTime = params.get("maxTime");
     });
     this.activatedRoute.data.subscribe(async (response: any) => {
       this.blockUI.stop();
       if (response["record"] && response["record"].data) {
+        const history = await this.eosService.getHistoryRows();
         const data = response["record"].data;
+        let historyArray: any = [];
+        if(history && history.rows) {
+          for(let i=0; i < history.rows.length; i++) {
+            if(history.rows[i].minTime === this.maxTime && history.rows[i].stamp_secs >= this.minTime) {
+              historyArray.push(history.rows[i]);
+            }
+          }
+        }
+
         this.minTime = data.minTime;
         this.maxTime = data.maxTime;
         this.frames = data.frames;

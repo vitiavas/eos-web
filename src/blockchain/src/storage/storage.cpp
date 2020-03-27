@@ -10,9 +10,12 @@ class [[eosio::contract("storage")]] storage : public eosio::contract {
 
     struct [[eosio::table]] history_audit {
       uint64_t id;
+      checksum256 hash_uid;
       std::string date;
       std::string status;
       std::string event;
+      uint32_t minTime;
+      uint32_t maxTime; 
       auto primary_key() const { return id; }
     };
 
@@ -23,11 +26,11 @@ class [[eosio::contract("storage")]] storage : public eosio::contract {
       uint32_t stamp_secs;
       uint32_t stamp_nsecs; 
       checksum256 txid;
-      vector<history_audit> history_list;
+      std::string code;
       auto primary_key() const { return id; }
 
       // Fix the table. May need to drop all blockchain and start a new one later because of primary key uniqueness and serialization is broken
-      EOSLIB_SERIALIZE( records_info, (id)(hash_uid)(hash)(stamp_secs)(stamp_nsecs)(txid)(history_list))
+      EOSLIB_SERIALIZE( records_info, (id)(hash_uid)(hash)(stamp_secs)(stamp_nsecs)(txid)(code))
 
     };
 
@@ -61,38 +64,28 @@ class [[eosio::contract("storage")]] storage : public eosio::contract {
         // get_first_receiver -> scope (Since we have only 1 table. get_first_receiver ensures that only 1 will be taken)
         // // Create a record in the table
         _records.emplace(user, [&](auto &new_record) {
-            history_audit history;
-            history.date = date;
-            history.status = status;
-            history.event = event;
             new_record.hash = hash;
             new_record.hash_uid = hash_uid;
             new_record.stamp_secs = stamp_secs;
             new_record.stamp_nsecs = stamp_nsecs;
-            new_record.history_list.push_back(history);
             new_record.txid = get_trx_id();
             new_record.id = _records.available_primary_key();
         });
     }
     
     [[eosio::action]]
-    void update(name user, checksum256 hash_rfid, uint32_t stamp_secs, uint32_t stamp_nsecs, std::string date, std::string status, std::string event) {
+    void update(name user, checksum256 hash_uid, std::string date, std::string event, std::string status, uint32_t minTime, uint32_t maxTime) {
         // Ensure this action is authorized by the user
         require_auth(user);
-        records records(get_self(), get_first_receiver().value);
-
-        history_audit history;
-        history.date = date;
-        history.status = status;
-        history.event = event;
-
-        for(auto itr = records.begin(); itr != records.end();) {
-          if(itr->hash_uid == hash_rfid) {
-            _records.modify(itr, user, [&](auto &row) {
-              row.history_list.push_back(history);
-            });
-          }
-        }
+        _history.emplace(user, [&](auto &new_record) {
+            new_record.hash_uid = hash_uid;
+            new_record.date = date;
+            new_record.status = status;
+            new_record.event = event;
+            new_record.minTime = minTime;
+            new_record.maxTime = maxTime;
+            new_record.id = _history.available_primary_key();
+        });
     }
 
     [[eosio::action]]
@@ -101,6 +94,12 @@ class [[eosio::contract("storage")]] storage : public eosio::contract {
       auto it = records.begin();
       while (it != records.end()) {
         it = records.erase(it);
+      }
+
+      history history(get_self(), get_first_receiver().value);
+      auto it2 = history.begin();
+      while (it2 != history.end()) {
+        it2 = history.erase(it2);
       }
     }
 

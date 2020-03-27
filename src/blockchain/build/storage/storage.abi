@@ -39,6 +39,10 @@
                     "type": "uint64"
                 },
                 {
+                    "name": "hash_uid",
+                    "type": "checksum256"
+                },
+                {
                     "name": "date",
                     "type": "string"
                 },
@@ -49,6 +53,14 @@
                 {
                     "name": "event",
                     "type": "string"
+                },
+                {
+                    "name": "minTime",
+                    "type": "uint32"
+                },
+                {
+                    "name": "maxTime",
+                    "type": "uint32"
                 }
             ]
         },
@@ -119,8 +131,8 @@
                     "type": "checksum256"
                 },
                 {
-                    "name": "history_list",
-                    "type": "history_audit[]"
+                    "name": "code",
+                    "type": "string"
                 }
             ]
         },
@@ -133,19 +145,15 @@
                     "type": "name"
                 },
                 {
-                    "name": "hash_rfid",
+                    "name": "hash_uid",
                     "type": "checksum256"
                 },
                 {
-                    "name": "stamp_secs",
-                    "type": "uint32"
-                },
-                {
-                    "name": "stamp_nsecs",
-                    "type": "uint32"
-                },
-                {
                     "name": "date",
+                    "type": "string"
+                },
+                {
+                    "name": "event",
                     "type": "string"
                 },
                 {
@@ -153,8 +161,12 @@
                     "type": "string"
                 },
                 {
-                    "name": "event",
-                    "type": "string"
+                    "name": "minTime",
+                    "type": "uint32"
+                },
+                {
+                    "name": "maxTime",
+                    "type": "uint32"
                 }
             ]
         }

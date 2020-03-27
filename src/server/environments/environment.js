@@ -5,6 +5,7 @@
 const environment = {
     eosio_contract_account_storage: "storage",
     eosio_contract_account_storage_action_insert: "insert",
+    eosio_contract_account_storage_action_update: "update",
     eosio_contract_account_storage_action_erase: "erase",
     eosio_account_name_producer: "gaspar",
     eosio_permission_active: "active",

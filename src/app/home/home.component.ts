@@ -95,6 +95,7 @@ export class HomeComponent implements OnInit {
    */
   loadRecord(record: any) {
     this.blockUI.start();
+    // this.eosService.update(record.images);
     this.router.navigate(['main', 'record', record.minTime, record.maxTime]);
   }
 
@@ -130,7 +131,9 @@ export class HomeComponent implements OnInit {
     if (frames) {
       const sortedFrames = this.sortFrames(frames);
       let startTime: any;
+      let videoFrames: any = [];
       for (let i = 0; i < sortedFrames.length; i++) {
+        videoFrames.push(sortedFrames[i]);
         if (i == 0) {
           startTime = sortedFrames[i].stamp_secs;
         } else if (sortedFrames[i].stamp_secs - sortedFrames[i - 1].stamp_secs >= 10) {
@@ -138,16 +141,20 @@ export class HomeComponent implements OnInit {
             hash_uid: sortedFrames[i].hash_uid,
             minTime: startTime,
             maxTime: sortedFrames[i].stamp_secs,
-            time: this.convertSecondsToTime(startTime) + " - " + this.convertSecondsToTime(sortedFrames[i].stamp_secs)
+            time: this.convertSecondsToTime(startTime) + " - " + this.convertSecondsToTime(sortedFrames[i].stamp_secs),
+            images: videoFrames
           });
-          startTime = sortedFrames[i].stamp_secs
+          startTime = sortedFrames[i].stamp_secs;
+          videoFrames = [];
         } else if (i == sortedFrames.length - 1) {
           videos.push({
             hash_uid: sortedFrames[i].hash_uid,
             minTime: startTime,
             maxTime: sortedFrames[i].stamp_secs,
-            time: this.convertSecondsToTime(startTime) + " - " + this.convertSecondsToTime(sortedFrames[i].stamp_secs)
+            time: this.convertSecondsToTime(startTime) + " - " + this.convertSecondsToTime(sortedFrames[i].stamp_secs),
+            images: videoFrames
           });
+          videoFrames = [];
         }
       }
     }

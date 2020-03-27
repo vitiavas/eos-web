@@ -15,6 +15,7 @@ export const environment = {
   express_url: "http://127.0.0.1:4000",
   eosio_contract_account_storage: "storage",
   eosio_contract_account_storage_action_insert: "insert",
+  eosio_contract_account_storage_action_update: "update",
   eosio_contract_account_storage_action_erase: "erase",
   eosio_contract_account_login: "login",
   eosio_contract_account_login_action_upsert: "upsert",
