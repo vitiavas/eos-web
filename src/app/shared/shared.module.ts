@@ -9,6 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { InputModule } from './components/input/input.module';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { FooterComponent } from './footer/footer.component';
+import { CardComponent } from './components/card/card.component';
 
 
 @NgModule({
@@ -28,11 +29,13 @@ import { FooterComponent } from './footer/footer.component';
     declarations: [
         HeaderComponent,
         FooterComponent,
+        CardComponent,
         SafeHtmlPipe
     ],
     exports: [
         HeaderComponent,
         FooterComponent,
+        CardComponent,
         SafeHtmlPipe
     ],
     providers: [

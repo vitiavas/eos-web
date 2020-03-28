@@ -2,8 +2,8 @@
 <app-alert [id]="alertId" [klass]="['position-fixed']"></app-alert>
 
 <section class="content--full">
-  <div class="row" style="justify-content: center;height: calc(100vh - 50px); top: 5vh; position: relative;">
-    <div class="col-md-8 vertical-separator">
+  <div class="row" style="justify-content: flex-start;  height: calc(100vh - 50px); top: 5vh; position: relative;">
+    <!-- <div class="col-md-8 vertical-separator">
       <div class="row mb-4">
         <div class="col-12" style="text-align: center;">
           <label class="welcome-text">{{ 'home.label.welcome' | translate }}</label>
@@ -62,11 +62,15 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- <div class="col-md-2">
-
     </div> -->
+
+    <div class="col-8">
+      <div class="row">
+        <div *ngFor="let record of records; let i = index" class="col-5">
+          <app-card [record]="record"></app-card>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
