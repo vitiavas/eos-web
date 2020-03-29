@@ -1,0 +1,43 @@
+.flex {
+  &-v {
+    &-start {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    &-end {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  &-h {
+    &-start {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    &-end {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  &-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+}

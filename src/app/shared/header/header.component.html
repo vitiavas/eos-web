@@ -1,8 +1,8 @@
-<header class="header">
+<header class="header__container" [class.shifted]="isMainPage">
   <!-- Logo -->
-  <span class="logo"><b>BlocksShow</b></span>
+  <span class="header__logo"><b>BlocksShow</b></span>
   <nav class="navbar navbar-static-top">
-    <div (click)="goHome()"[class.selected]="isHome()" class="home-div">
+    <div (click)="goHome()" [class.selected]="isHome()" class="header__home">
       <img src="assets/images/home-white.svg">
     </div>
 
@@ -11,7 +11,6 @@
       <li dropdown class="user-authenticated">
         <a dropdownToggle>
           <div class="user-info">
-
             <span style="font-weight: bold;">{{ user }}</span>
           </div>
         </a>
@@ -26,7 +25,7 @@
             <div class="row">
               <div class="col-md-6"></div>
               <div class="col-md-6 text-right">
-                <a class="btn btn-danger" style="color: white"(click)="logout()">Log out</a>
+                <a class="btn btn-danger" style="color: white" (click)="logout()">Log out</a>
               </div>
             </div>
           </div>

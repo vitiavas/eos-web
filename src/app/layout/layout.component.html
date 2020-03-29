@@ -1,8 +1,12 @@
 <main class="main" style="overflow-x: hidden;">
-  <div [style.height.px]="alertsLength * 30">
-    <app-header></app-header>
+  <app-sidebar *ngIf="isMainPage"></app-sidebar>
+  <div class="layout-wrapper">
+    <div [style.height.px]="alertsLength * 30">
+      <app-header></app-header>
+    </div>
+    <div class="background"></div>
   </div>
-  <div class="background"></div>
+
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </main>

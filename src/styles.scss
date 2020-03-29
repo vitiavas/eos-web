@@ -1,20 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/variables";
 @import "./assets/scss/bootstrap-imports";
-@import "./assets/scss/flex";
+@import "./assets/scss/_flex";
 @import "./assets/scss/variables";
 @import "./assets/scss/text";
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 @import "./assets/scss/layout";
 
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}

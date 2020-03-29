@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { v4 as uuid } from 'uuid';
-import { AlertifyService } from '../services/alertify.service';
-import { EosService } from '../services/eos.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { BlockUI, NgBlockUI } from "ng-block-ui";
+import { v4 as uuid } from "uuid";
+import { AlertifyService } from "../services/alertify.service";
+import { EosService } from "../services/eos.service";
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  selector: "app-main-page",
+  templateUrl: "./main-page.component.html",
+  styleUrls: ["./main-page.component.scss"]
 })
 /****************************************************************************************************
  ****************************************************************************************************
@@ -22,7 +22,6 @@ import { EosService } from '../services/eos.service';
  ****************************************************************************************************
  **********************************************************ª*****************************************/
 export class MainPageComponent implements OnInit {
-
   @BlockUI() blockUI: NgBlockUI;
   alertId: string = uuid();
 
@@ -34,6 +33,8 @@ export class MainPageComponent implements OnInit {
   ) {
     this.alertify.alertId = this.alertId;
   }
+
+  opened: boolean = false;
 
   id: any;
   frames: any;
@@ -56,9 +57,12 @@ export class MainPageComponent implements OnInit {
         const history = await this.eosService.getHistoryRows();
         const data = response["record"].data;
         let historyArray: any = [];
-        if(history && history.rows) {
-          for(let i=0; i < history.rows.length; i++) {
-            if(history.rows[i].minTime === this.maxTime && history.rows[i].stamp_secs >= this.minTime) {
+        if (history && history.rows) {
+          for (let i = 0; i < history.rows.length; i++) {
+            if (
+              history.rows[i].minTime === this.maxTime &&
+              history.rows[i].stamp_secs >= this.minTime
+            ) {
               historyArray.push(history.rows[i]);
             }
           }
@@ -67,13 +71,13 @@ export class MainPageComponent implements OnInit {
         this.minTime = data.minTime;
         this.maxTime = data.maxTime;
         this.frames = data.frames;
-        if(data.error && data.error.code === 'hash.failure') {
+        if (data.error && data.error.code === "hash.failure") {
           this.alertify.clear();
           this.alertify.warn(data.error.message, true);
         }
         for (let i = 0; i < this.frames.length; i++) {
           await delay(150);
-          this.img = 'data:image/jpeg;base64,' + this.frames[i];
+          this.img = "data:image/jpeg;base64," + this.frames[i];
         }
       }
     });
@@ -81,26 +85,28 @@ export class MainPageComponent implements OnInit {
 
   /**
    * Removes Frames previously displayed on screen
-   * @param {*} minTime 
+   * @param {*} minTime
    * @param {*} maxTime
    * Specifies times between first and last frames
    */
   removeFrames() {
     this.blockUI.start();
-    this.eosService.removeFrames(this.minTime, this.maxTime).then(async (data: any) => {
-      this.blockUI.stop();
-      this.alertify.clear();
-      this.alertify.success("main-page.removal.success", true);
-      await this.delay(2000);
-      this.router.navigate(["home"]);
-    }, error => {
-      this.blockUI.stop();
-      if(error && error.type == "signature_rejected") {
-        
-      } else {
+    this.eosService.removeFrames(this.minTime, this.maxTime).then(
+      async (data: any) => {
+        this.blockUI.stop();
         this.alertify.clear();
-        this.alertify.error("generic.error.transaction", true);
+        this.alertify.success("main-page.removal.success", true);
+        await this.delay(2000);
+        this.router.navigate(["home"]);
+      },
+      error => {
+        this.blockUI.stop();
+        if (error && error.type == "signature_rejected") {
+        } else {
+          this.alertify.clear();
+          this.alertify.error("generic.error.transaction", true);
+        }
       }
-    });
+    );
   }
 }

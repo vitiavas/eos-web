@@ -1,14 +1,23 @@
+@import "../../assets/scss/variables";
 
+.main-page__container {
+  padding: $header-height 20px 0 $sidebar-width;
 
-.video-container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-}
-.flex-center {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    top: 5vh;
+  .video {
+    &__container {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      position: relative;
+      &--wrapper {
+        height: calc(100vh - #{$header-height});
+        &.flex-center {
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          top: 5vh;
+        }
+      }
+    }
+  }
 }

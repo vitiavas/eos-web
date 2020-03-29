@@ -1,20 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { RecordsListResolver } from 'src/app/home/_resolvers/records-list.resolver';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { RecordsListResolver } from "src/app/home/_resolvers/records-list.resolver";
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  selector: "app-card",
+  templateUrl: "./card.component.html",
+  styleUrls: ["./card.component.scss"]
 })
 export class CardComponent implements OnInit {
-
   @Input() record: any;
 
-  constructor() { }
+  @Output() clickEvent: EventEmitter<any> = new EventEmitter();
+  constructor() {}
 
   ngOnInit() {
-    debugger;
     this.record;
   }
-
 }
