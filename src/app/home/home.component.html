@@ -1,17 +1,64 @@
-<!-- <app-alert></app-alert> -->
 <app-alert [id]="alertId" [klass]="['position-fixed']"></app-alert>
+<div class="background" [class.blur]="isDraft"></div>
+<section class="content--full row">
+  <div class="col-9 mb-5">
+    <div class="row">
+      <ng-container *ngFor="let record of records; let i = index">
+        <div *ngIf="!(i >= 3)" class="records col-4">
+          <app-card [isDraft]="isDraft" [record]="record" (clickEvent)="loadRecord($event)"></app-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="col-3 mb-5" style="z-index: 2 !important;" [class.flex-center]="!isDraft">
+    <div *ngIf="!isDraft" class="delete__container w-75">
+      <div class="w-100">
+        <div class="row flex-center mb-4 mt-2">
+          <div class="col-12 flex-center mt-2 mb-2">
+            <span class="delete__span">Choose Images to remove</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 flex-center">
+            <div (click)="deleteCards()" class="delete__garbage--container flex-center">
+              <img class="icon" src="assets/images/garbage.svg">
+            </div>
+          </div>
+        </div>
+      </div>
 
-<section class="content--full">
-  <div class="row" style="justify-content: flex-start;  height: calc(100vh - 50px); top: 5vh; position: relative;">
-    <div class="col-8">
-      <div class="row">
-        <div *ngFor="let record of records; let i = index" class="col-5 mb-5 mr-3">
-          <app-card [record]="record" (clickEvent)="loadRecord($event)"></app-card>
+    </div>
+
+    <div class="modal-container flex-center" [class.visible]="isDraft">
+      <div class="w-100">
+        <div class="row mb-3">
+          <div class="col-12 flex-center">
+            <div class="button--confirm w-75" href="#" role="button" (click)="deleteCards()">
+              <span>Delete</span>
+              <div class="icon">
+                <i class="fa fa-remove"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 flex-center">
+            <div class="button--decline w-75" href="#" role="button" (click)="declineDeletion()">
+              <span>Cancel</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-3">
-      <app-search (searchEvent)="search($event)"></app-search>
+  </div>
+
+  <div class="col-12">
+    <div class="row">
+      <ng-container *ngFor="let record of records; let i = index">
+        <div *ngIf="i >= 3" class="records col-3 mb-5">
+          <app-card [isDraft]="isDraft" [record]="record" (clickEvent)="loadRecord($event)"></app-card>
+        </div>
+      </ng-container>
     </div>
   </div>
 </section>

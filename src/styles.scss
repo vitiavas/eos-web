@@ -8,6 +8,8 @@
 @import "./assets/scss/_flex";
 @import "./assets/scss/variables";
 @import "./assets/scss/text";
+@import "./assets/scss/modal.scss";
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 @import "./assets/scss/layout";
@@ -18,5 +20,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

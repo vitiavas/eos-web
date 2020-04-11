@@ -55,7 +55,7 @@ $theme-colors: (
   warning: $yellow,
   danger: $red,
   dark: $gray-700,
-  active: $color_active
+  active: $color_active,
 );
 
 // Border Radius
@@ -64,11 +64,15 @@ $border-radius-lg: 5px;
 $border-radius-sm: 2px;
 
 // Header
-$header-height: 75px;
+$header-height: 60px;
 $header-shadow: 0 1px 10px rgba($black, 0.2);
 $header-z-index: 10;
 
 // Sidebar
-$sidebar-width: 350px;
+$sidebar-width: 400px;
 $sidebar-span-color: #9b9ba6;
 $sidebar-span-color-active: #c0c0d6;
+$sidebar-background-color: #34323a;
+
+// Z-index
+$card-content: 5;

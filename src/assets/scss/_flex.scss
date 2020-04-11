@@ -5,6 +5,11 @@
       align-items: flex-start;
     }
 
+    &-center {
+      display: flex;
+      align-items: center;
+    }
+
     &-end {
       display: flex;
       align-items: flex-end;
@@ -15,6 +20,11 @@
     &-start {
       display: flex;
       justify-content: flex-start;
+    }
+
+    &-center {
+      display: flex;
+      justify-self: center;
     }
 
     &-end {

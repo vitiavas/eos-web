@@ -41,30 +41,36 @@ p {
     align-items: center;
     left: 0;
     top: 0;
-    background-color: #768fa7;
-
+    border-bottom: 3px solid #768fa7;
+    // background-color: #f9f9f9;
+    background: linear-gradient(10deg, white 0%, #b4d0d3 70%);
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
     &.shifted {
       width: calc(100% - #{$sidebar-width});
       left: $sidebar-width;
+      position: absolute;
     }
 
     > .navbar {
       width: 100%;
-      padding-right: 100px;
       height: 100%;
       padding-top: 0px;
       padding-bottom: 0px;
     }
   }
 
+  &__vertical-line {
+    border-right: 2px solid #b4d0d3;
+  }
+
   &__logo {
-    color: #fff;
+    color: #7b7070;
     border-bottom: 0 solid transparent;
     transition: width 0.3s ease-in-out;
     display: block;
     float: left;
     height: 50px;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 50px;
     text-align: center;
     width: 230px;
@@ -81,7 +87,12 @@ p {
     width: 65px;
     justify-content: center;
     cursor: pointer;
-    box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.25);
+    background-color: #34323a;
+    color: #dadada;
+    padding: 5px 85px;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
     &:hover {
       box-shadow: inset 0px 1px 15px rgba(0, 0, 0, 0.25);
     }

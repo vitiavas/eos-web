@@ -1,21 +1,14 @@
 <div class="sidebar--first" [class.opened]="opened">
-
   <div class="sidebar__header">
-    <div class="row w-100 dashboard" [class.visible]="!openedHistory">
+    <div class="row w-100 dashboard visible">
       <div class="col-10 flex-h-start flex-v-center">
-        <img class="sidebar__header__menu mr-3" src="assets/images/menu.svg">
+        <img class="sidebar__header__menu mr-3" src="assets/images/menu.svg" />
         <span class="sidebar__header__title">Dashboard</span>
-      </div>
-    </div>
-    <div class="row w-100 history" [class.visible]="openedHistory">
-      <div class="col-10 flex-v-center">
-        <img class="sidebar__header__menu mr-3" src="assets/images/scroll.svg">
-        <span class="sidebar__header__title">Audit History</span>
       </div>
     </div>
   </div>
   <div class="sidebar__body">
-    <div class="sidebar__body__box--blue expanded">
+    <div class="sidebar__body__box--blue expanded" style="padding: 30px; border-left: 2px solid #009688;">
       <div class="row">
         <div class="col-10">
           <div class="row mb-2">
@@ -23,106 +16,87 @@
               <span class="sidebar__span--status">Status</span>
             </div>
           </div>
-          <div class="row mb-4">
+          <div class="row">
             <div class="col-12">
               <span class="sidebar__span--description">Verification Successful</span>
             </div>
           </div>
-          <div class="btn sidebar__button--verify">
-            <span class="card__button__span">
-              Repeat Verification
-            </span>
-          </div>
         </div>
         <div class="col-2">
-          <img class="sidebar__tick" src="assets/images/tick.svg">
+          <img class="sidebar__tick" src="assets/images/tick.svg" />
         </div>
       </div>
     </div>
-    <div class="sidebar__section__container" (click)="openedHistory = true">
-      <img class="sidebar__image--scroll mr-3" src="assets/images/scroll.svg">
-      <span class="sidebar__span w-50">Audit History</span>
+    <div class="sidebar__body--history">
+      <div class="sidebar__section__container">
+        <img class="sidebar__image--scroll mr-3" src="assets/images/scroll.svg" />
+        <span class="sidebar__span w-75">Audit History</span>
+        <div class="sidebar__arrow__container w-25">
+          <img *ngIf="!openedHistory" (click)="openedHistory = !openedHistory" class="sidebar__arrow--down"
+            src="assets/images/arrow.svg" />
+          <img *ngIf="openedHistory" (click)="openedHistory = !openedHistory" class="sidebar__arrow--up"
+            src="assets/images/arrow.svg" />
+        </div>
+      </div>
+      <div class="sidebar__body__box--blue zero-level" [class.expanded]="openedHistory">
+        <ng-container *ngFor="let item of history; let i = index">
+          <div (click)="item.expanded = !item.expanded" class="sidebar__section__container first-level">
+            <span class="sidebar__span w-50">{{ item?.event }} - {{ item?.date }}</span>
+            <div class="sidebar__arrow__container w-50" style="z-index: 999;">
+              <img *ngIf="!item?.expanded" class="sidebar__arrow--down" src="assets/images/arrow.svg" />
+              <img *ngIf="item?.expanded" class="sidebar__arrow--up" src="assets/images/arrow.svg" />
+            </div>
+          </div>
+          <div class="sidebar__body__box--blue first-level" [class.expanded]="item?.expanded">
+            <div class="row">
+              <div class="col-8">
+                <div class="row mb-2">
+                  <div class="col-12">
+                    <span class="sidebar__span--status">Date - Time</span>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-12">
+                    <span class="sidebar__span--description">{{
+                      item?.date
+                    }}</span>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-12">
+                    <span class="sidebar__span--status">Status</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <span class="sidebar__span--description">{{
+                      item?.status
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <img class="sidebar__tick" src="assets/images/tick.svg" />
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
   <div class="sidebar__line__container">
-    <hr class="sidebar__line__self">
+    <hr class="sidebar__line__self" />
   </div>
   <div class="sidebar__footer">
     <div class="row">
       <div class="col-12">
-        <div class="btn sidebar__button--delete flex-center">
-          <span class="sidebar__button__span mr-3">
-            Delete Images
-          </span>
-          <img class="sidebar__button__bin" src="assets/images/bin-2.svg">
-        </div>
+        <a class="sidebar__button--delete" href="#" role="button">
+          <span>remove</span>
+          <div class="icon">
+            <i class="fa fa-remove"></i>
+          </div>
+        </a>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="sidebar--second" [class.opened]="openedHistory">
-
-  <div class="sidebar__header">
-    <div class="sidebar__header__arrow__container">
-      <img class="sidebar__arrow--back" src="assets/images/back.svg" (click)="openedHistory = false">
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <span class="sidebar__header__title">Audit History</span>
-      </div>
-    </div>
-  </div>
-  <div class="sidebar__body">
-    <ng-container *ngFor="let item of history; let i = index">
-      <div (click)="item.expanded = !item.expanded" class="sidebar__section__container">
-        <span class="sidebar__span w-50">{{ item?.event }}</span>
-        <div class="sidebar__arrow__container w-50">
-          <img *ngIf="!item?.expanded" class="sidebar__arrow--down" src="assets/images/arrow.svg">
-          <img *ngIf="item?.expanded" class="sidebar__arrow--up" src="assets/images/arrow.svg">
-        </div>
-      </div>
-      <div class="sidebar__body__box--blue" [class.expanded]="item?.expanded">
-        <div class="row">
-          <div class="col-8">
-            <div class="row mb-2">
-              <div class="col-12">
-                <span class="sidebar__span--status">Date - Time</span>
-              </div>
-            </div>
-            <div class="row mb-4">
-              <div class="col-12">
-                <span class="sidebar__span--description">{{ item?.date }}</span>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col-12">
-                <span class="sidebar__span--status">Status</span>
-              </div>
-            </div>
-            <div class="row mb-4">
-              <div class="col-12">
-                <span class="sidebar__span--description">{{ item?.status }}</span>
-              </div>
-            </div>
-            <div class="btn sidebar__button--verify">
-              <span class="card__button__span">
-                Repeat Verification
-              </span>
-            </div>
-          </div>
-          <div class="col-4">
-            <img class="sidebar__tick" src="assets/images/tick.svg">
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-  <div class="sidebar__footer">
-    <div class="btn btn-danger sidebar__button--delete">
-      <span class="sidebar__button__span">
-        Delete Images
-      </span>
-    </div>
-  </div>
-</div> -->

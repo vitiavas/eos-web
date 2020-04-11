@@ -1,34 +1,156 @@
+@import "../../../../assets/scss/variables";
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .card {
   display: block;
   width: 100%;
-  padding: 20px 25px;
+  padding: 20px 20px;
   background: #ffffff;
-  border: 2px solid #a6cdda;
+  border: 1px solid #a6cdda;
   box-sizing: border-box;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  transition: transform 0.2s ease-in;
+  &.draft {
+    opacity: 0.8;
+  }
+
+  &.checked {
+    transform: scale(1.05);
+  }
+
+  &__header {
+    &--first {
+      background: linear-gradient(-115deg, white 50%, #00bcd4 70%);
+      display: flex;
+      width: 100%;
+      padding: 35px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      border-radius: 5px;
+      border-top-right-radius: 20px;
+    }
+
+    &--second {
+      background: linear-gradient(7deg, white 50%, transparent 40%);
+      width: 100%;
+      padding: 45px;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      z-index: 3;
+      border-radius: 5px;
+      border-top-right-radius: 0px;
+    }
+
+    &--third {
+      background: linear-gradient(20deg, #12dcc9 40%, #c3fffd 65%);
+      width: 100%;
+      padding: 35px;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      z-index: 2;
+      border-radius: 5px;
+      border-top-left-radius: 85px;
+      border-top-right-radius: 15px;
+    }
+  }
+
+  &__content {
+    &__container {
+      z-index: $card-content;
+    }
+  }
+
+  &__status {
+    &__container {
+      z-index: $card-content;
+    }
+  }
 
   &__tick {
-    width: 70px;
+    width: 50px;
+  }
+
+  &__eye {
+    width: 15px;
+  }
+
+  &__clock {
+    width: 15px;
+    float: left;
   }
 
   &__span {
-    float: right;
+    float: left;
     color: #768fa7;
-    font-size: 20px;
+    font-size: 16px;
   }
 
   &__button {
     &__span {
       color: #768fa7;
-      font-size: 20px;
+      font-size: 16px;
     }
 
     &--watch {
-      background-color: #eaeaea;
-      border: 3px solid #a6cdda;
-      border-radius: 20px;
-      padding: 7px 60px;
+      background-color: #ffffff;
+      border: 1px solid #a6cdda;
+      border-radius: 10px;
+      padding: 10px 10px 10px 5px;
+      font-size: 15px;
+      font-family: sans-serif;
+      text-decoration: none;
+      color: #333;
+      letter-spacing: 2px;
+      text-align: center;
+      position: relative;
+      transition: all 0.35s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.disabled {
+        cursor: not-allowed;
+      }
+
+      span,
+      img {
+        position: relative;
+        z-index: 2;
+      }
+
+      &:after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: #c3fefc;
+        transition: all 0.35s;
+        border-radius: 10px;
+      }
+
+      &:hover:not(.disabled) {
+        color: #fff;
+        border: 1px solid #0bbcd4;
+      }
+
+      &:hover:after {
+        width: 100%;
+      }
     }
 
     &--delete {
@@ -36,5 +158,95 @@
       width: 45px;
       height: 45px;
     }
+  }
+}
+
+/* The container */
+.container {
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  height: 35px;
+  width: 35px;
+  border: 1px solid #a6cddb;
+  background-color: transparent;
+  &.checked {
+    animation: pulse 0.5s both ease-out;
+  }
+}
+
+/* On mouse-over, add a grey background color */
+// .container:hover input ~ .checkmark {
+//   background-color: #ccc;
+// }
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #02bcd4;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 12px;
+  top: 7px;
+  width: 8px;
+  height: 16px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(133, 169, 44, 0.4);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgba(133, 169, 44, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(133, 169, 44, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(133, 169, 44, 0.4);
+    box-shadow: 0 0 0 0 rgba(133, 169, 44, 0.4);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 10px rgba(133, 169, 44, 0);
+    box-shadow: 0 0 0 10px rgba(133, 169, 44, 0);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(133, 169, 44, 0);
+    box-shadow: 0 0 0 0 rgba(133, 169, 44, 0);
   }
 }

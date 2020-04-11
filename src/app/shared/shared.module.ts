@@ -11,9 +11,10 @@ import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
 import { FooterComponent } from "./footer/footer.component";
 import { CardComponent } from "./components/card/card.component";
 import { SearchComponent } from "./components/search/search.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { CommonModule } from "@angular/common";
+import { CheckboxComponent } from "./components/checkbox/checkbox.component";
 
 @NgModule({
   imports: [
@@ -21,14 +22,15 @@ import { CommonModule } from "@angular/common";
     InputModule,
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     BsDropdownModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
 
   declarations: [
@@ -37,7 +39,8 @@ import { CommonModule } from "@angular/common";
     CardComponent,
     SearchComponent,
     SidebarComponent,
-    SafeHtmlPipe
+    CheckboxComponent,
+    SafeHtmlPipe,
   ],
   exports: [
     HeaderComponent,
@@ -45,8 +48,9 @@ import { CommonModule } from "@angular/common";
     CardComponent,
     SearchComponent,
     SidebarComponent,
-    SafeHtmlPipe
+    CheckboxComponent,
+    SafeHtmlPipe,
   ],
-  providers: [AlertifyService]
+  providers: [AlertifyService],
 })
 export class SharedModule {}

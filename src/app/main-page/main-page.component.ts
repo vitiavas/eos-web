@@ -1,14 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { v4 as uuid } from "uuid";
 import { AlertifyService } from "../services/alertify.service";
 import { EosService } from "../services/eos.service";
+import { ChangeDetectionStrategy } from "@angular/core/src/render3/jit/compiler_facade_interface";
 
 @Component({
   selector: "app-main-page",
   templateUrl: "./main-page.component.html",
-  styleUrls: ["./main-page.component.scss"]
+  styleUrls: ["./main-page.component.scss"],
 })
 /****************************************************************************************************
  ****************************************************************************************************
@@ -29,7 +30,8 @@ export class MainPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private eosService: EosService,
     private alertify: AlertifyService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.alertify.alertId = this.alertId;
   }
@@ -42,12 +44,17 @@ export class MainPageComponent implements OnInit {
   minTime: any;
   maxTime: any;
 
-  delay = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
+  delay = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
     this.alertify.clear();
-    const delay = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
-    this.activatedRoute.paramMap.subscribe(params => {
+    const delay = (ms: any) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+    this.activatedRoute.paramMap.subscribe((params) => {
       this.minTime = params.get("minTime");
       this.maxTime = params.get("maxTime");
     });
@@ -99,7 +106,7 @@ export class MainPageComponent implements OnInit {
         await this.delay(2000);
         this.router.navigate(["home"]);
       },
-      error => {
+      (error) => {
         this.blockUI.stop();
         if (error && error.type == "signature_rejected") {
         } else {

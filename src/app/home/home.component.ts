@@ -5,12 +5,13 @@ import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { v4 as uuid } from "uuid";
 import { AlertifyService } from "../services/alertify.service";
 import { EosService } from "../services/eos.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 declare const Buffer;
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"]
+  styleUrls: ["./home.component.scss"],
 })
 /****************************************************************************************************
  ****************************************************************************************************
@@ -26,35 +27,109 @@ export class HomeComponent implements OnInit {
   // Decorator wires up blockUI instance
   @BlockUI() blockUI: NgBlockUI;
   data: any;
+
+  isDraft: boolean = false;
+
   records: any = [
     {
       time: "18:30:05 - 18:30:45",
-      date: "10/09/2020",
+      date: "10/09/20",
       description: "40 seconds of contact",
       minTime: "1",
-      maxTime: "1"
+      maxTime: "1",
     },
     {
       time: "18:30:05 - 18:30:45",
-      date: "10/09/2020",
+      date: "10/09/20",
       description: "40 seconds of contact",
       minTime: "1",
-      maxTime: "1"
+      maxTime: "1",
     },
     {
       time: "18:30:05 - 18:30:45",
-      date: "10/09/2020",
+      date: "10/09/20",
       description: "40 seconds of contact",
       minTime: "1",
-      maxTime: "1"
-    }
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
+    {
+      time: "18:30:05 - 18:30:45",
+      date: "10/09/20",
+      description: "40 seconds of contact",
+      minTime: "1",
+      maxTime: "1",
+    },
   ];
   alertId: string = uuid();
   constructor(
     private activatedRoute: ActivatedRoute,
     private alertify: AlertifyService,
     private eosService: EosService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {
     this.alertify.alertId = this.alertId;
   }
@@ -66,7 +141,7 @@ export class HomeComponent implements OnInit {
    */
   sortFrames(frames: any) {
     if (frames) {
-      frames.sort(function(a: any, b: any) {
+      frames.sort(function (a: any, b: any) {
         if (a.stamp_secs < b.stamp_secs) {
           return -1;
         }
@@ -82,7 +157,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.blockUI.stop();
     this.alertify.clear();
-    this.activatedRoute.data.subscribe(data => {
+    this.activatedRoute.data.subscribe((data) => {
       if (data["recordsList"] && data["recordsList"].rows) {
         let hash_uid = localStorage.getItem("uid");
         let storageRows = data["recordsList"].rows;
@@ -107,6 +182,19 @@ export class HomeComponent implements OnInit {
 
   eraseAllDataFromStorage() {
     this.eosService.eraseAllDataFromStorage();
+  }
+
+  deleteCards(content: any) {
+    this.isDraft = true;
+  }
+
+  declineDeletion() {
+    this.isDraft = false;
+    if (this.records && this.records.length > 0) {
+      for (let i = 0; i < this.records.length; i++) {
+        this.records[i].checked = false;
+      }
+    }
   }
 
   /**
@@ -172,7 +260,7 @@ export class HomeComponent implements OnInit {
               this.convertSecondsToTime(startTime) +
               " - " +
               this.convertSecondsToTime(sortedFrames[i].stamp_secs),
-            images: videoFrames
+            images: videoFrames,
           });
           startTime = sortedFrames[i].stamp_secs;
           videoFrames = [];
@@ -185,7 +273,7 @@ export class HomeComponent implements OnInit {
               this.convertSecondsToTime(startTime) +
               " - " +
               this.convertSecondsToTime(sortedFrames[i].stamp_secs),
-            images: videoFrames
+            images: videoFrames,
           });
           videoFrames = [];
         }
