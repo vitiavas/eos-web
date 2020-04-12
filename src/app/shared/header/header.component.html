@@ -1,38 +1,49 @@
 <header class="header__container" [class.shifted]="isMainPage">
   <!-- Logo -->
 
-
   <nav class="navbar navbar-static-top">
     <div class="col-3 header__vertical-line flex-center">
       <span class="header__logo">BlockShow</span>
     </div>
-    <div class="col-5">
+    <div *ngIf="!isMainPage" class="col-6">
+      <app-search></app-search>
+    </div>
+    <div class="col-3">
       <div dropdown class="user-authenticated">
         <a dropdownToggle>
           <div class="user-info">
             <span style="font-weight: bold;">{{ user }}</span>
           </div>
         </a>
-        <div *dropdownMenu style="z-index: 9 !important; padding: 0 !important"
-          class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+        <div
+          *dropdownMenu
+          style="z-index: 9 !important; padding: 0 !important;"
+          class="dropdown-menu dropdown-menu-right dropdown-menu--block"
+          role="menu"
+        >
           <div class="row user-header">
             <div class="col-md-12">
-              <p> {{ user }} </p>
+              <p>{{ user }}</p>
             </div>
           </div>
           <div class="user-footer">
             <div class="row">
               <div class="col-md-6"></div>
               <div class="col-md-6 text-right">
-                <a class="btn btn-danger" style="color: white" (click)="logout()">Log out</a>
+                <a
+                  class="btn btn-danger"
+                  style="color: white;"
+                  (click)="logout()"
+                  >Log out</a
+                >
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-3 mr-5 flex-end">
-      <div *ngIf="isMainPage" (click)="goHome()" class="header__home">
+    <div *ngIf="isMainPage" class="col-3 mr-5 flex-end">
+      <div (click)="goHome()" class="header__home">
         <span>Home</span>
       </div>
     </div>

@@ -17,6 +17,7 @@ import { SharedModule } from "../shared/shared.module";
 import { HomeComponent } from "./home.component";
 import { HomeRouting } from "./home.routing";
 import { RecordsListResolver } from "./_resolvers/records-list.resolver";
+import { SharedService } from "../services/shared.service";
 
 @NgModule({
   declarations: [HomeComponent],
@@ -45,7 +46,7 @@ import { RecordsListResolver } from "./_resolvers/records-list.resolver";
       },
     }),
   ],
-  providers: [RecordsListResolver],
+  providers: [RecordsListResolver, SharedService],
 })
 export class HomeModule {
   constructor(private translate: TranslateService) {

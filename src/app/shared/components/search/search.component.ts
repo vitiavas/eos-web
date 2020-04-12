@@ -1,27 +1,41 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { SharedService } from "src/app/services/shared.service";
 
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.scss"]
+  styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
-  @Output() searchEvent: EventEmitter<any> = new EventEmitter();
+  formVisible: boolean = false;
 
   searchForm: FormGroup = this.formBuilder.group({
     date: [null],
     from: [null],
-    to: [null]
   });
+
+  dateClass: any = {
+    "margin-bottom": 0,
+    color: "#7b92aa",
+  };
+
+  timeClass: any = {
+    height: "calc(1.5em + .3rem + 2px)",
+    "margin-bottom": 0,
+    color: "#7b92aa",
+  };
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {}
 
   emitSearch() {
-    this.searchEvent.emit({
-      ...this.searchForm.value
-    });
+    SharedService.setSearchResult(this.searchForm.value);
+  }
+
+  resetSearch() {
+    this.searchForm.reset();
+    SharedService.clearSearchResult();
   }
 }

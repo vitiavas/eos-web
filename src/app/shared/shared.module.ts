@@ -15,6 +15,14 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { CommonModule } from "@angular/common";
 import { CheckboxComponent } from "./components/checkbox/checkbox.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {
+  MatDatepickerModule,
+  MatInputModule,
+  MatNativeDateModule,
+} from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SharedService } from "../services/shared.service";
 
 @NgModule({
   imports: [
@@ -23,6 +31,10 @@ import { CheckboxComponent } from "./components/checkbox/checkbox.component";
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    NgbModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     BsDropdownModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -51,6 +63,6 @@ import { CheckboxComponent } from "./components/checkbox/checkbox.component";
     CheckboxComponent,
     SafeHtmlPipe,
   ],
-  providers: [AlertifyService],
+  providers: [AlertifyService, SharedService],
 })
 export class SharedModule {}

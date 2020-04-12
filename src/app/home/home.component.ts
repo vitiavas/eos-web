@@ -6,6 +6,8 @@ import { v4 as uuid } from "uuid";
 import { AlertifyService } from "../services/alertify.service";
 import { EosService } from "../services/eos.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { SharedService } from "../services/shared.service";
+import { Subscription } from "rxjs";
 declare const Buffer;
 
 @Component({
@@ -124,14 +126,27 @@ export class HomeComponent implements OnInit {
     },
   ];
   alertId: string = uuid();
+
+  subscription: Subscription;
+
+  searchResult: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private alertify: AlertifyService,
     private eosService: EosService,
-    private router: Router,
-    private modalService: NgbModal
+    private router: Router
   ) {
     this.alertify.alertId = this.alertId;
+
+    this.subscription = SharedService.getSearchResult().subscribe(
+      (searchResult: any) => {
+        this.searchResult = searchResult;
+      }
+    );
+  }
+
+  recordInSearch(record: any) {
+    return true;
   }
 
   /**
@@ -280,5 +295,10 @@ export class HomeComponent implements OnInit {
       }
     }
     return videos;
+  }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
   }
 }
