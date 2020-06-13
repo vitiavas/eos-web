@@ -1,4 +1,9 @@
-<div class="card" [class.visible]="visible" [class.checked]="record?.checked" [class.draft]="isDraft">
+<div
+  class="card"
+  [class.visible]="visible"
+  [class.checked]="record?.checked"
+  [class.draft]="isDraft"
+>
   <div class="card__header--first"></div>
   <div class="card__header--second"></div>
   <div class="card__header--third"></div>
@@ -27,8 +32,11 @@
   </div>
   <div class="row mt-2">
     <div class="col-7">
-      <div (click)="!isDraft && clickEvent.emit(record)" class="btn btn-primary card__button--watch"
-        [class.disabled]="isDraft">
+      <div
+        (click)="!isDraft && click()"
+        class="btn btn-primary card__button--watch"
+        [class.disabled]="isDraft"
+      >
         <img src="assets/images/eye.svg" class="card__eye mr-2" />
         <span class="card__button__span"> View Images </span>
       </div>

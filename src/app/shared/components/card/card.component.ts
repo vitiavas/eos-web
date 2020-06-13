@@ -6,6 +6,7 @@ import { RecordsListResolver } from "src/app/home/_resolvers/records-list.resolv
   templateUrl: "./card.component.html",
   styleUrls: ["./card.component.scss"],
 })
+// https://dev.to/wescopeland/easier-angular-unit-testing-4aic
 export class CardComponent implements OnInit {
   @Input() record: any;
   @Input() isDraft: boolean = false;
@@ -16,6 +17,10 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     this.record;
+  }
+
+  click() {
+    this.clickEvent.emit(this.record);
   }
 
   ngAfterViewInit() {

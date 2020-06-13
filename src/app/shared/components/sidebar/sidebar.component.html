@@ -41,7 +41,7 @@
       <div class="sidebar__body__box--blue zero-level" [class.expanded]="openedHistory">
         <ng-container *ngFor="let item of history; let i = index">
           <div (click)="item.expanded = !item.expanded" class="sidebar__section__container first-level">
-            <span class="sidebar__span w-50">{{ item?.event }} - {{ item?.date }}</span>
+            <span class="sidebar__span w-50">{{ item?.event }}</span>
             <div class="sidebar__arrow__container w-50" style="z-index: 999;">
               <img *ngIf="!item?.expanded" class="sidebar__arrow--down" src="assets/images/arrow.svg" />
               <img *ngIf="item?.expanded" class="sidebar__arrow--up" src="assets/images/arrow.svg" />

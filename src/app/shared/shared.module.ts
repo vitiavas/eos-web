@@ -1,28 +1,26 @@
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
-import { HttpLoaderFactory } from "../core/translation";
+import { CommonModule } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { AlertifyModule } from "./alertify/alertify.module";
-import { AlertifyService } from "../services/alertify.service";
-import { HeaderComponent } from "./header/header.component";
-import { BsDropdownModule } from "ngx-bootstrap";
-import { InputModule } from "./components/input/input.module";
-import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
-import { FooterComponent } from "./footer/footer.component";
-import { CardComponent } from "./components/card/card.component";
-import { SearchComponent } from "./components/search/search.component";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { SidebarComponent } from "./components/sidebar/sidebar.component";
-import { CommonModule } from "@angular/common";
-import { CheckboxComponent } from "./components/checkbox/checkbox.component";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
   MatDatepickerModule,
   MatInputModule,
   MatNativeDateModule,
 } from "@angular/material";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { BsDropdownModule } from "ngx-bootstrap";
+import { HttpLoaderFactory } from "../core/translation";
+import { AlertifyService } from "../services/alertify.service";
 import { SharedService } from "../services/shared.service";
+import { AlertifyModule } from "./alertify/alertify.module";
+import { CardComponent } from "./components/card/card.component";
+import { InputModule } from "./components/input/input.module";
+import { SearchComponent } from "./components/search/search.component";
+import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { FooterComponent } from "./footer/footer.component";
+import { HeaderComponent } from "./header/header.component";
+import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
 
 @NgModule({
   imports: [
@@ -51,7 +49,6 @@ import { SharedService } from "../services/shared.service";
     CardComponent,
     SearchComponent,
     SidebarComponent,
-    CheckboxComponent,
     SafeHtmlPipe,
   ],
   exports: [
@@ -60,7 +57,6 @@ import { SharedService } from "../services/shared.service";
     CardComponent,
     SearchComponent,
     SidebarComponent,
-    CheckboxComponent,
     SafeHtmlPipe,
   ],
   providers: [AlertifyService, SharedService],
