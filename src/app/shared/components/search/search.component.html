@@ -1,0 +1,32 @@
+<div class="search" [formGroup]="searchForm">
+  <div class="row search__form flex-center" [class.visible]="formVisible">
+    <div class="col-md-5" style="top: 5px;">
+      <app-input
+        class="form-control"
+        [cssClass]="dateClass"
+        placeholder="{{ 'dd/mm/yyyy' | translate }}"
+        [calendar]="true"
+        formControlName="date"
+      >
+      </app-input>
+    </div>
+    <div style="top: 5px;" class="col-md-2 flex-center">
+      <app-input
+        class="form-control"
+        [time]="true"
+        [cssClass]="timeClass"
+        placeholder="{{ 'search.placeholder.from' | translate }}"
+        formControlName="from"
+      >
+      </app-input>
+    </div>
+    <div class="col-md-4 flex-start">
+      <div (click)="emitSearch()" class="btn search__button mr-3">
+        <img class="search__button--icon" src="assets/images/research.svg" />
+      </div>
+      <div (click)="resetSearch()" class="btn search__button">
+        <img class="search__button--icon" src="assets/images/close.svg" />
+      </div>
+    </div>
+  </div>
+</div>

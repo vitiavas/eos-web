@@ -1,0 +1,181 @@
+Projecto EOS guia de instalação: 
+
+https://developers.eos.io/eosio-home/docs/getting-the-software
+
+1. Instalar Eos: 
+    - https://github.com/EOSIO/eos/releases/
+
+2. Instalar EOS Contract Development Kit (CDK)
+    - wget https://github.com/EOSIO/eosio.cdt/releases/download/v1.6.1/eosio.cdt_1.6.1-1_amd64.deb
+    - sudo apt install ./eosio.cdt_1.6.1-1_amd64.deb
+
+    - contracts folder : 
+        $ ./build.sh
+        $ ./install.sh
+
+3. Configurar EOS Blockchain config.ini file: 
+
+    - http-server-address = 127.0.0.1:8888
+    - access-control-allow-origin = *
+    - access-control-allow-headers = true
+    - enable-stale-production = true
+    - producer-name = eosio
+    - plugin = eosio::producer_plugin
+    - plugin = eosio::chain_api_plugin
+    - plugin = eosio::http_plugin
+
+
+4. Create Wallet 
+
+    $ cleos wallet create --to-console
+
+    Save Password : PW5KSADwS62Bv263obof9SWmRBzAsdtYRSnDBb6GkGVH82v9MoTXL
+
+5. Create Key
+
+    $ cleos create key --to-console
+
+    $ cleos wallet import
+
+    
+Keys for test: 
+
+    vasylkovskyi 5HqUSLhmeHdADmVQsA44ZjrMFLotxRxh7FV9zv9XmMX64qZrscw 26730
+                 EOS5yieqx6d8jZ3EkZGLu1W25cB6dwhhaCxLjYC2NYhH9fJnw7F4h
+                 
+    sequeira 5KWpoQNngE9AdzEB2vmL1TLtixdYtng2zEBMw2Q9CtFb8wNcKN6 5337
+             EOS5nKM7hQBgurNDXYxreTHPHP527D4gS9GoUMYYaRBMVQT7vxL2S
+
+    storage 5K4cCJ1AGG2vvZ5QWreRjMG4QqpBwKBaaaXVEQd1XzWb6eiufpV
+            EOS6cdeSjUjSdcJcrf6sZcThD6C3nPiQQ3B7bu4Bur46bmUfhyXyT
+            
+    login 5JNS2CQ7PDTvQSzQFUjRMBed5jS1XGosCKVvJAJzgthnt78uBWx
+          EOS8MnvSN5TgTuP7CMzz4FzMqB1YpUZ7ags2223pbjgGeMG8UMu7Y
+          
+    producernode 5JU8HxM6pj4ScxE3k9Xf594qXcewY7m4Wr3zgcfASvt3S1U19B8
+                 EOS53U5EMqjMmqMR1B1Nzs9bD7fnPNttakEunHY5YbGboxxuCh4Es
+    
+    
+    
+6. Create Account 
+
+    $ cleos create account eosio <accountname> YOUR_PUBLIC_KEY 
+
+    
+7. Deploy Smart Contract -> ./scripts/fullBuld.sh    
+
+
+8. Boot sequence 
+
+https://developers.eos.io/eosio-nodeos/docs/bios-boot-sequence
+
+Install ROS melodic middle-ware
+
+http://wiki.ros.org/melodic/Installation/Ubuntu
+
+1. sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+
+2. sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+3. curl -sSL 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xC1CF6E31E6BADE8868B172B4F42ED6FBAB17C654' | sudo apt-key add -
+
+4. sudo apt update
+
+5. sudo apt install ros-melodic-desktop-full
+
+6. sudo rosdep init
+
+7. rosdep update
+
+Setup environment: 
+
+It's convenient if the ROS environment variables are automatically added to your bash session every time a new shell is launched:
+
+    $ echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+
+    $ source ~/.bashrc
+
+    $ sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+
+Set Catkin Workspace
+
+    $ mkdir -p ~/catkin_ws/src
+    
+    $ cd ~/catkin_ws/
+    
+    $ catkin_make
+    
+    $ source devel/setup.bash
+    
+    Check ROS_PACKAGE_PATH environment
+    
+    $ echo $ROS_PACKAGE_PATH
+    /home/youruser/catkin_ws/src:/opt/ros/melodic/share
+
+Install ROS monarch messages in catkin workspace
+
+    Place monarch_msgs folder into ~/catkin_ws/src folder
+    
+    - dentro do folder catkin_ws, 
+            
+        $ catkin_make
+
+    - Se faltar a package do move_msgs fazer 
+    
+        $ sudo apt-get install ros-melodic-move-base-msgs
+p
+    
+
+ROS configurations
+
+ROS_MASTER_URI = http:/10.1.15.26:11311
+
+ROS_HOSTNAME = 10.1.15.26
+
+ROS_IP = myIP
+
+add hosts to the /etc/hosts (ros_master_uri ros_master_hostname) : ex. (10.1.15.26 mbot09h)
+        
+Install Mongo 
+
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#install-mongodb-community-edition-using-deb-packages
+
+Mongo TroubleShooting: 
+    If connection fails, execute following steps:
+
+        $ sudo rm /var/lib/mongodb/mongod.lock 
+        $ sudo service mongod start 
+        $ mongo
+
+
+NodeJS TroubleShooting:
+    - Watcher failure { Error: ENOSPC: no space left on device, watch 'src/server/index.js'...
+
+        execute: 
+            $ sudo sysctl fs.inotify.max_user_watches=582222 && sudo sysctl -p
+
+            or 
+
+            $ echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+            to make it permanent
+
+
+Angular 7: 
+
+    compile on save: sudo sysctl fs.inotify.max_user_watches=524288
+                     sudo sysctl -p --system
+p
+
+
+p
+
+Experiencia:
+
+1 - correlacionar os timestamps entre as mensagens dos bags com os dados recolhidos na experiencia (imagens e rfid)
+
+2 - Sempre que não há RFIDs entao nao ha imagens
+
+3 - Quando Há RFID saber se a imagem ficou definida
+
+4 - 

@@ -1,27 +1,26 @@
-
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../core/translation/translation.loader';
-import { MainPageModule } from '../main-page/main-page.module';
-import { AlertifyModule } from '../shared/alertify/alertify.module';
-import { InputModule } from '../shared/components/input/input.module';
-import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from "@angular/common";
+import { HttpClient } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from "@ngx-translate/core";
+import { HttpLoaderFactory } from "../core/translation/translation.loader";
+import { MainPageModule } from "../main-page/main-page.module";
+import { AlertifyModule } from "../shared/alertify/alertify.module";
+import { InputModule } from "../shared/components/input/input.module";
+import { SharedModule } from "../shared/shared.module";
 // import { effects, reducers } from '../store';
-import { HomeComponent } from './home.component';
-import { HomeRouting } from './home.routing';
-import { RecordsListResolver } from './_resolvers/records-list.resolver';
-
-
-
+import { HomeComponent } from "./home.component";
+import { HomeRouting } from "./home.routing";
+import { RecordsListResolver } from "./_resolvers/records-list.resolver";
+import { SharedService } from "../services/shared.service";
 
 @NgModule({
-  declarations: [
-    HomeComponent
-  ],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -29,27 +28,26 @@ import { RecordsListResolver } from './_resolvers/records-list.resolver';
     InputModule,
     AlertifyModule,
     MainPageModule,
+    NgbModule,
     // BrowserAnimationsModule,
     // PerfectScrollbarModule,
     // BsDropdownModule.forRoot(),
 
     // StoreModule.forFeature(STATE_ID, reducers),
     // EffectsModule.forFeature(effects),
-    NgbModule.forRoot(),
+    // NgbModule.forRoot(),
+    NgbModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
   ],
-  providers: [
-    RecordsListResolver
-  ]
+  providers: [RecordsListResolver, SharedService],
 })
-
 export class HomeModule {
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang("pt");

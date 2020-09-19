@@ -43,5 +43,12 @@
     "login.error.identity-not-confirmed": "Confirmação de Identidade é obrigatório",
     "main-page.removal.success": "Dados foram Removidos com Sucesso",
     "blockchain.error.hash-verification": "Atenção, a verificação do hash falhou. Integridade dos dados está comprometida",
-    "main-page.error.empty-data": "Dados não "
+    "main-page.error.empty-data": "Dados não ",
+    "search.label.date": "Date",
+    "search.placeholder.date": "Insert Date",
+    "search.label.from": "From",
+    "search.placeholder.from": "00:00",
+    "search.label.to": "To",
+    "search.placeholder.to": "00:00"
+
 }

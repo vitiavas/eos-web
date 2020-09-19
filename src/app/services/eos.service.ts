@@ -60,6 +60,18 @@ export class EosService {
         })
     }
 
+    getHistoryRows() {
+        return this.rpc.get_table_rows({
+            "json": true,
+            "code": 'storage',    // contract who owns the table
+            "scope": 'storage',   // scope of the table
+            "table": "history",    // name of the table as specified by the contract abi
+            "limit": 9999
+        }).catch(error => {
+            return error;
+        })
+    }
+
     getLoginRows() {
         return this.rpc.get_table_rows({
             "json": true,
@@ -69,6 +81,42 @@ export class EosService {
         }).catch(error => {
             return error;
         })
+    }
+
+    async update(images: any) {
+        if (!this.scatter) {
+            this.scatter = await ScatterJS.scatter.connect('eos-angular').then((connected: boolean) => {
+                if (!connected) {
+                    return false;
+                }
+                return ScatterJS.scatter;
+            });
+        }
+        const rpc: any = this.rpc;
+        const eosScatter: any = this.scatter.eos(this.network, Api, { rpc });
+        const account = this.scatter.identity.accounts.find(x => x.blockchain === 'eos');
+        const hash_uid = localStorage.getItem('uid');
+        const date = new Date().getTime().toString();
+        for(let image of images) {
+            eosScatter.transact({
+                actions: [{
+                    account: environment.eosio_contract_account_storage,
+                    name: environment.eosio_contract_account_storage_action_update,
+                    authorization: [{
+                        actor: account.name,
+                        permission: 'active',
+                    }],
+                    data: {
+                        user: account.name, code: image.code, event: 'ACCESSED', status: 'VERIFIED', date: date
+                    }
+                }],
+    
+            }, {
+                blocksBehind: 3,
+                expireSeconds: 60
+            });
+        }
+
     }
 
     async removeFrames(minTime: number, maxTime: number) {

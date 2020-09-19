@@ -1,0 +1,9 @@
+rm -f build/login/*.wasm
+rm -f build/login/*.wast
+rm -f build/login/*.abi
+rm -f build/rfidscanner/*.wasm
+rm -f build/rfidscanner/*.wast
+rm -f build/rfidscanner/*.abi
+rm -f build/storage/*.wasm
+rm -f build/storage/*.wast
+rm -f build/storage/*.abi

@@ -5,14 +5,14 @@
 @import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/variables";
 @import "./assets/scss/bootstrap-imports";
+@import "./assets/scss/_flex";
 @import "./assets/scss/variables";
 @import "./assets/scss/text";
+@import "./assets/scss/modal.scss";
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-// // Site Styles
 @import "./assets/scss/layout";
-
-@import "./assets/scss/bootstrap-overrides/tabs";
 
 html,
 body {
@@ -20,5 +20,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

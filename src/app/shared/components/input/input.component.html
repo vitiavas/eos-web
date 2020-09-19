@@ -1,13 +1,15 @@
-<div [class.form-group] = "label">
+<div [class.form-group]="label">
   <ng-content select="app-input-prefix"></ng-content>
-  
-  <label *ngIf="label" [attr.for]="id">{{ label }} <span [innerHTML]="requiredIndicatorView"></span></label>
+
+  <label *ngIf="label" [attr.for]="id"
+    >{{ label }} <span [innerHTML]="requiredIndicatorView"></span
+  ></label>
   <textarea
     *ngIf="type === 'textarea'"
     class="form-control"
     [class.is-invalid]="!fieldValidation.isValid()"
     [class.is-required]="fieldValidation.isRequired()"
-    [rows]=rows
+    [rows]="rows"
     [(ngModel)]="value"
     [id]="id"
     [name]="name"
@@ -25,14 +27,18 @@
     (focus)="onFocus($event)"
     (blur)="onBlur($event)"
     (click)="click.emit($event)"
-    #textareaControl>
+    #textareaControl
+  >
   </textarea>
+
   <input
-    *ngIf="type !== 'textarea'"
+    *ngIf="type !== 'textarea' && !calendar && !time"
     class="form-control"
     [class.is-invalid]="!fieldValidation.isValid()"
+    [ngClass]="calendar ? 'calendar' : ''"
+    [ngStyle]="getClass"
     [ngModel]="value"
-    (ngModelChange)= "value = $event"
+    (ngModelChange)="value = $event"
     [hidden]="passwordTextVisible"
     [id]="id"
     [name]="name"
@@ -57,41 +63,90 @@
     [pattern]="patterns"
     #inputControl
   />
+  <ng-container *ngIf="type !== 'textarea' && calendar && !time">
+    <input
+      [class.is-invalid]="!fieldValidation.isValid()"
+      [ngClass]="calendar ? 'calendar' : ''"
+      [ngStyle]="getClass"
+      [ngModel]="value"
+      (ngModelChange)="value = $event"
+      [hidden]="passwordTextVisible"
+      [id]="id"
+      [name]="name"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [type]="type"
+      [min]="'' + min"
+      [max]="'' + max"
+      [minlength]="minlength"
+      [maxlength]="maxlength"
+      [attr.tabindex]="tabindex"
+      [attr.autocomplete]="autocomplete"
+      [attr.autocorrect]="autocorrect"
+      [attr.spellcheck]="spellcheck"
+      (change)="onChange($event)"
+      (keypress)="onkeypress($event)"
+      (keyup)="onKeyUp($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+      (click)="click.emit($event)"
+      [required]="required"
+      [pattern]="patterns"
+      bsDatepicker
+      matInpuy
+      [bsConfig]="{
+        isAnimated: true,
+        adaptivePosition: true,
+        containerClass: 'theme-blue'
+      }"
+    />
+    <span class="calendar__span--search">Search for private data</span>
+    <span class="calendar__span--date">Date</span>
+  </ng-container>
 
-  
-  <input
-    *ngIf="passwordToggleEnabled"
-    [hidden]="!passwordTextVisible"
-    type="text"
-    class="form-control"
-    [class.is-invalid]="!fieldValidation.isValid()"
-    [class.is-required]="fieldValidation.isRequired()"
-    type="text"
-    [id]="id + '-password'"
-    [placeholder]="placeholder"
-    [name]="name"
-    [disabled]="disabled"
-    [minlength]="minlength"
-    [maxlength]="maxlength"
-    [attr.autocomplete]="autocomplete"
-    [attr.autocorrect]="autocorrect"
-    [attr.spellcheck]="spellcheck"
-    [attr.tabindex]="tabindex"
-    [(ngModel)]="value"
-    (change)="onChange($event)"
-    (keyup)="onKeyUp($event)"
-    (focus)="onFocus($event)"
-    (blur)="onBlur($event)"
-    (click)="click.emit($event)"
-    [required]="required"
-    #passwordControl
-  />
-  
+  <ng-container *ngIf="type !== 'textarea' && time && !calendar">
+    <input
+      class="time"
+      [class.time--placeholder]="isPlaceholder"
+      [class.is-invalid]="!fieldValidation.isValid()"
+      [ngClass]="calendar ? 'calendar' : ''"
+      [ngStyle]="getClass"
+      [ngModel]="value"
+      (ngModelChange)="value = $event"
+      [hidden]="passwordTextVisible"
+      [id]="id"
+      [name]="name"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [type]="type"
+      [min]="'' + min"
+      [max]="'' + max"
+      [minlength]="minlength"
+      [maxlength]="maxlength"
+      [attr.tabindex]="tabindex"
+      [attr.autocomplete]="autocomplete"
+      [attr.autocorrect]="autocorrect"
+      [attr.spellcheck]="spellcheck"
+      (change)="onChange($event)"
+      (keypress)="onkeypress($event)"
+      (keyup)="onKeyUp($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+      (click)="click.emit($event)"
+      [required]="required"
+      [pattern]="patterns"
+      appTimeMask
+    />
+    <span class="calendar__span--time">Time</span>
+  </ng-container>
+
   <ng-content select="app-input-suffix"></ng-content>
-  
+
   <!-- <i
   *ngIf="type === 'password' && passwordToggleEnabled" class="zmdi zmdi-eye" (click)="togglePassword()">
   </i> -->
-  <app-field-validation #fieldValidation  [validations]="validations"></app-field-validation>
-  </div>
-  
+  <app-field-validation
+    #fieldValidation
+    [validations]="validations"
+  ></app-field-validation>
+</div>
