@@ -16,8 +16,8 @@ export class ExpressService {
 
 
     loadRecord(minTime: string, maxTime: string) {
-        const hash_rfid = localStorage.getItem('uid');
-        return axios.get(`${environment.express_url}/data/${minTime}/${maxTime}/${hash_rfid}`).catch((error: any) => {
+        const hash_uid = localStorage.getItem('uid');
+        return axios.get(`${environment.express_url}/data/${minTime}/${maxTime}/${hash_uid}`).catch((error: any) => {
             console.log(error);
             this.router.navigate(['error', '404'], { queryParams: { returnUrl: this.router.url } });
         })

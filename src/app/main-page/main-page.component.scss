@@ -1,14 +1,33 @@
+@import "../../assets/scss/variables";
 
+.main-page__container {
+  padding: $header-height 20px 0 $sidebar-width;
+  background-color: #ffffffd4;
 
-.video-container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    position: relative;
-}
-.flex-center {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    top: 5vh;
+  .video {
+    &__container {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      position: relative;
+
+      &__div {
+        border-radius: 11px;
+        background: #dcdcdc;
+        border: 4px solid #8c8a96;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      &--wrapper {
+        height: calc(100vh - #{$header-height});
+        &.flex-center {
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          top: 5vh;
+        }
+      }
+    }
+  }
 }

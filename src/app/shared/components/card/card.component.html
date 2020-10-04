@@ -1,0 +1,51 @@
+<div
+  class="card"
+  [class.visible]="visible"
+  [class.checked]="record?.checked"
+  [class.draft]="isDraft"
+>
+  <div class="card__header--first"></div>
+  <div class="card__header--second"></div>
+  <div class="card__header--third"></div>
+  <div class="row">
+    <div class="col-8 card__content__container mt-3">
+      <div class="row mb-2">
+        <div class="col-12 flex-h-center">
+          <img src="assets/images/clock.svg" class="card__clock mr-2" />
+          <span class="card__span">{{ record?.date }}</span>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-12">
+          <span class="card__span">{{ record?.time }}</span>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-12">
+          <span class="card__span">{{ record?.description }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 text-right card__status__container">
+      <img class="card__tick" src="assets/images/tick.svg" />
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-7">
+      <div
+        (click)="!isDraft && click()"
+        class="btn btn-primary card__button--watch"
+        [class.disabled]="isDraft"
+      >
+        <img src="assets/images/eye.svg" class="card__eye mr-2" />
+        <span class="card__button__span"> View Images </span>
+      </div>
+    </div>
+    <div class="col-5" *ngIf="isDraft">
+      <label class="container">
+        <input type="checkbox" [(ngModel)]="record.checked" />
+        <span class="checkmark" [class.checked]="record.checked"></span>
+      </label>
+    </div>
+  </div>
+</div>

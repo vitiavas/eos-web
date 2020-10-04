@@ -6,7 +6,8 @@ const environment = require('../environments/environment');
 const ecc = require('eosjs-ecc');
 const { Storage } = require('../models/index');
 const { Rfid } = require('../models/index');
-
+const uuidV4 = require('uuid/v4');
+// -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1' 
 /**
  * 
  * @param {*} items
@@ -97,11 +98,7 @@ function buildTransaction(msg, hash_rfid) {
     const hash_uid = hash_rfid;
     const stamp_secs = msg.header && msg.header.stamp && msg.header.stamp.secs;
     const stamp_nsecs = msg.header && msg.header.stamp && msg.header.stamp.nsecs;
-    // console.log("-----------------------Blockchain Transaction-------------------------");
-    // console.log(convertSecondsToTime(stamp_secs));
-    // console.log("From: " + environment.eosio_account_name_producer + " To: " + environment.eosio_contract_account_storage);
-    // console.log("Smart Contract: " + environment.eosio_contract_account_storage + " Action: " + environment.eosio_contract_account_storage_action_insert);
-    // console.log("Data: " + "{" + " Hash UID: " + hash_uid +  + "}");
+    const code = uuidV4();
     return {
         actions: [{
             account: environment.eosio_contract_account_storage,
@@ -111,10 +108,40 @@ function buildTransaction(msg, hash_rfid) {
                 permission: environment.eosio_permission_active,
             }],
             data: {
-                user: environment.eosio_account_name_producer, hash: hash, hash_uid: hash_uid, stamp_secs: stamp_secs, stamp_nsecs: stamp_nsecs
+                user: environment.eosio_account_name_producer, 
+                hash: hash, 
+                hash_uid: hash_uid, 
+                stamp_secs: stamp_secs, 
+                stamp_nsecs: stamp_nsecs,
+                code: code,
+                date: stamp_secs * 1000,
+                event: 'CREATED',
+                status: 'VERIFIED'
             },
         }],
     };
+}
+
+function buildUpdateTransaction(minTime, maxTime, hash_uid, status) {
+    return {
+        actions: [{
+            account: environment.eosio_contract_account_storage,
+            name: environment.eosio_contract_account_storage_action_update,
+            authorization: [{
+                actor: environment.eosio_account_name_producer,
+                permission: environment.eosio_permission_active,
+            }],
+            data: {
+                user: environment.eosio_account_name_producer, 
+                event: 'ACCESSED', 
+                status,
+                hash_uid,
+                minTime,
+                maxTime,
+                date: new Date().getTime().toString()
+            },
+        }],
+    };   
 }
 /**
  * 
@@ -208,6 +235,7 @@ module.exports = {
     getLoginRows,
     findStorageHashByTXID,
     buildTransaction,
+    buildUpdateTransaction,
     saveToDatabaseStorage,
     saveToDatabaseRfid,
     findUserByHashRfid,

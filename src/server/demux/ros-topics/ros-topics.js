@@ -56,7 +56,7 @@ const connect = (server) => {
                                     console.log(convertSecondsToTime(new Date().getTime()) + ", " + "DATABASE_PERSISTANCE" + ", " + msg.header.seq + ", " + rfid._id + ", " + transaction_id);
                                 }).catch(error => {
                                     // console.log("-----------------------Transaction Failure-----------------------------");
-                                    // console.log(error);
+                                    console.log(error);
                                 });
                             } else {
                                 console.log(convertSecondsToTime(new Date().getTime()) + ", " + "IMAGE_NOT_PAIRED_WITH_UNKNOWN_RFID" + ", " + msg.header.seq);
